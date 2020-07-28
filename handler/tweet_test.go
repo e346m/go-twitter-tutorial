@@ -12,7 +12,7 @@ import (
 )
 
 var (
-    userJSON = `{"user":"1","content": "Hello world"}` + "\n"
+    userJSON = `{"user":"1","content":"Hello world again!"}` + "\n"
 )
 
 func TestFetchTweetHandler (t *testing.T) {
