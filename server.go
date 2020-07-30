@@ -5,7 +5,8 @@ import (
     "github.com/labstack/echo"
     "github.com/labstack/echo/middleware"
 
-    "./handler"
+    "go-twitter-tutorial.com/m/handler"
+    "go-twitter-tutorial.com/m/model"
 )
 
 func main() {
@@ -14,9 +15,11 @@ func main() {
     e.Use(middleware.Logger())
     e.Use(middleware.Recover())
 
+    h := &handler.Handler{&model.Tweet{}}
+
     api := e.Group("/api/v1")
-    api.GET("/tweets", handler.FetchTweetListHandler)
-    api.GET("/tweets/:id", handler.FetchTweetHandler)
+    //api.GET("/tweets", h.FetchTweetListHandler)
+    api.GET("/tweets/:id", h.FetchTweetHandler)
 
     e.Logger.Fatal(e.Start(":4242"))
 }

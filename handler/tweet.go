@@ -5,19 +5,15 @@ import (
     "github.com/labstack/echo"
 )
 
-type Tweet struct {
-    User string `json:"user"`
-    Content string `json:"content"`
-}
 
-func FetchTweetHandler (c echo.Context) error {
+func (h *Handler) FetchTweetHandler (c echo.Context) error {
     id := c.Param("id")
-    return c.JSON(http.StatusOK, Tweet{User: id, Content: "Hello world again!"})
+    h.ItemGetter.GetItem(id)
+    return c.JSON(http.StatusOK, h.ItemGetter)
 }
 
-func FetchTweetListHandler (c echo.Context) error {
-    return c.JSON(http.StatusOK, []Tweet{
-        { User: "mishiro", Content: "Hello world!" },
-        { User: "reiji", Content: "See you tomorrow!" },
-    })
+/*func (h *Handler) FetchTweetListHandler (c echo.Context) error {
+    h.ItemGetter.GetItem(id)
+    return c.JSON(http.StatusOK, )
 }
+*/

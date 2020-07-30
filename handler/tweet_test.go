@@ -12,8 +12,18 @@ import (
 )
 
 var (
-    userJSON = `{"user":"1","content":"Hello world again!"}` + "\n"
+    userJSON = `{"user":"10","content":"Fake hello world"}` + "\n"
 )
+
+type FakeTweet struct {
+    User string `json:"user"`
+    Content string `json:"content"`
+}
+
+func (t *FakeTweet) GetItem(id string) error {
+    *t = FakeTweet{User: id, Content: "Fake hello world"}
+    return nil
+}
 
 func TestFetchTweetHandler (t *testing.T) {
     e := echo.New()
@@ -22,9 +32,11 @@ func TestFetchTweetHandler (t *testing.T) {
     c := e.NewContext(req, rec)
     c.SetPath("/tweets/:id")
     c.SetParamNames("id")
-    c.SetParamValues("1")
+    c.SetParamValues("10")
 
-    FetchTweetHandler(c)
+    h := &Handler{&FakeTweet{}}
+
+    h.FetchTweetHandler(c)
 
     if http.StatusOK != rec.Code {
         t.Errorf(
