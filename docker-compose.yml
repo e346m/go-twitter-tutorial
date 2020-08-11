@@ -1,0 +1,12 @@
+version: '3'
+services:
+  db:
+    image: postgres:9.6.11
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: psql
+      POSTGRES_DB: go_twitter_development
+    ports:
+      - '15432:5432'
+    volumes:
+      - ./postgresql/volumes:/var/lib/postgresql/data:Z

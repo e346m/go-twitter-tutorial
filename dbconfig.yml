@@ -1,0 +1,11 @@
+development:
+    dialect: postgres
+    datasource: dbname=go_twitter_development user=postgres
+        password=psql host=localhost port=15432 sslmode=disable
+    dir: migrations
+
+production:
+    dialect: postgres
+    datasource: dbname=go_twitter sslmode=disable
+    dir: migrations/postgres
+    table: migrations

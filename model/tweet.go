@@ -1,13 +1,16 @@
 package model
 
+import "fmt"
+
 type Tweet struct {
-    User string `json:"user"`
-    Content string `json:"content"`
+	User    string `json:"user"`
+	Content string `json:"content"`
 }
 
 func (t *Tweet) GetItem(id string) error {
-    *t = Tweet{User: id, Content: "Hello world"}
-    return nil
+	fmt.Println("test")
+	*t = Tweet{User: id, Content: "Hello world"}
+	return nil
 }
 
 /*func (t *Tweet) GetList() error {
